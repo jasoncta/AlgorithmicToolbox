@@ -13,9 +13,18 @@ int gcd(int a, int b) {
   return current_gcd;
 }
 
+int EuclidGCD(int a, int b) {
+  if (b == 0) {
+    return a;
+  }
+  int aa = a%b;
+  return EuclidGCD(b, aa);
+}
+
 int main() {
   int a, b;
   std::cin >> a >> b;
-  std::cout << gcd(a, b) << std::endl;
+  //std::cout << gcd(a, b) << std::endl;
+  std::cout << EuclidGCD(a, b) << std::endl;
   return 0;
 }
