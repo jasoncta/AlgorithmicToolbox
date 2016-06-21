@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+using namespace std;
+
 
 using std::vector;
 
@@ -7,8 +9,43 @@ double get_optimal_value(int capacity, vector<int> weights, vector<int> values) 
   double value = 0.0;
 
   // write your code here
+  double A[weights.size()];
+  double V = 0;
+  double W = capacity;
+  double amount = 0;
+  
 
-  return value;
+
+  for (int i = 0; i < weights.size(); i++) {
+
+    if (W == 0) {
+      return V;
+    }
+    double maxRatio = 0;
+    int indexOfMax = 0;
+    for (int j = 0; j <weights.size(); j++) {
+      double ratio = (double)values[j]/(double)weights[j];
+
+      if (ratio > maxRatio) {
+        maxRatio = ratio;
+        indexOfMax = j;
+      }
+
+    }
+
+    if (weights[indexOfMax] < W) {
+      amount = weights[indexOfMax];
+    }
+    else {
+      amount = W;
+    }
+    V = V + amount*maxRatio;
+    values[indexOfMax] = 0;
+    //A[i] = A[i] + amount;
+    W = W - amount;
+  }
+
+  return V;
 }
 
 int main() {
